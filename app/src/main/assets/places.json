@@ -1,0 +1,52 @@
+{
+  "places": [
+    {
+      "name": "Al Bicerin",
+      "description": "Al Bicerin is the oldest cafe in Turin. It opened in 1763 and through the years has attracted the loyal following of poets and politicians, philosophers and composers and anyone else with a chill in their bones and a taste for the sublime.",
+      "imagePath": "albicerin.png",
+      "category": "Coffees",
+      "lat": "45.076334",
+      "long": "7.678958"
+    },
+    {
+      "name": "Palazzo madama",
+      "description": "Palace that was the first Senate of the Italian Kingdom, and takes its traditional name from the embellishments it received under two queens (madama) of the House of Savoy.",
+      "imagePath": "palazzomadama.png",
+      "category": "Palaces",
+      "lat": "45.070970",
+      "long": "7.685882"
+    },
+    {
+      "name": "Piazza San Carlo",
+      "description": "Piazza San Carlo was designed by Carlo di Castellamonte in 1642 and completed in 1650. In the middle of the piazza you’ll find the equestrian statue of Emanuele Filiberto (known to all as “El Caval èd brons”), sculpted by Carlo Marocchetti in 1838. The porticoed buildings surrounding the piazza give space to numerous bars, cafes, and restaurants.",
+      "imagePath": "sancarlo.png",
+      "category": "Squares",
+      "lat": "45.067253",
+      "long": "7.682117"
+    },
+    {
+      "name": "Basilica di Superga",
+      "description": "Church that was built from 1717 to 1731 for Victor Amadeus II of Savoy, designed by Filippo Juvarra, at the top of the hill of Superga.",
+      "imagePath": "superga.png",
+      "category": "Churches",
+      "lat": "45.080806",
+      "long": "7.767677"
+    },
+    {
+      "name": "Parco del Valentino",
+      "description": "Parco del Valentino (also known as Valentino Park) is a popular public park in Turin, Italy. It is located along the west bank of the Po river. It covers an area of 500,000m², which makes it Turin's second largest park (Turin's largest park, the 840,000m² Pellerina Park, is Italy's most extended urban green area)",
+      "imagePath": "valentino.png",
+      "category": "Parks",
+      "lat": "45.052348",
+      "long": "7.686446"
+    },
+    {
+      "name": "Gran Madre di Dio",
+      "description": "The church of Gran Madre di Dio is a Neoclassic-style church located in front of Piazza Vittorio Veneto, at the western side of the bridge Vittorio Emanuele I, in Turin, Italy.",
+      "imagePath": "granmadre.png",
+      "category": "Churches",
+      "lat": "45.062489",
+      "long": "7.699038"
+    }
+  ]
+}
