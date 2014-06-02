@@ -32,7 +32,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        //utils = new JsonUtils(getApplicationContext());
+        utils = new JsonUtils(getApplicationContext());
         //map = utils.getMap();
         //places = utils.getAllPlaces();
         

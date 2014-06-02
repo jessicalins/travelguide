@@ -22,8 +22,6 @@ import it.polito.travelguide.app.model.Place;
 public class PlacesAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
     private ArrayList<Place> places;
-    private String section;
-
 
     public PlacesAdapter(Context context, ArrayList<Place> places) {
         this.mInflater = LayoutInflater.from(context);
