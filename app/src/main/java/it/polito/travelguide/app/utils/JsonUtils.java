@@ -92,7 +92,7 @@ public class JsonUtils {
 
     public ArrayList<String> getCategories(HashMap<String, ArrayList<Place>> map) {
         ArrayList<String> categories = new ArrayList<String>();
-        for(Map.Entry entry : map.entrySet()) {
+        for(Map.Entry<String, ArrayList<Place>> entry : map.entrySet()) {
             categories.add(entry.getKey().toString());
         }
         return categories;
@@ -107,6 +107,12 @@ public class JsonUtils {
             place.setCategory(result.getString("category"));
             place.setLat(result.getString("lat"));
             place.setLg(result.getString("long"));
+            ArrayList<String> picturesArray = new ArrayList<String>();
+            JSONArray pictures = result.getJSONArray("pictures");
+            for(int i=0; i<pictures.length(); i++){
+            	picturesArray.add(pictures.getString(i));
+            }
+            place.setPictures(picturesArray);
         } catch (JSONException e) {
             e.printStackTrace();
             Log.d("EXCEPTION", "<json> - " + e.toString());

@@ -6,7 +6,8 @@
       "imagePath": "albicerin.png",
       "category": "Coffees",
       "lat": "45.076334",
-      "long": "7.678958"
+      "long": "7.678958",
+      "pictures": ["albicerin.png", "albicerin2.png"]
     },
     {
       "name": "Palazzo madama",
@@ -14,15 +15,17 @@
       "imagePath": "palazzomadama.png",
       "category": "Palaces",
       "lat": "45.070970",
-      "long": "7.685882"
+      "long": "7.685882",
+      "pictures": ["palazzomadama.png", "palazzomadama1.png", "palazzomadama2.png"]
     },
     {
       "name": "Piazza San Carlo",
-      "description": "Piazza San Carlo was designed by Carlo di Castellamonte in 1642 and completed in 1650. In the middle of the piazza you’ll find the equestrian statue of Emanuele Filiberto (known to all as “El Caval èd brons”), sculpted by Carlo Marocchetti in 1838. The porticoed buildings surrounding the piazza give space to numerous bars, cafes, and restaurants.",
+      "description": "Piazza San Carlo was designed by Carlo di Castellamonte in 1642 and completed in 1650. In the middle of the piazza youâ€™ll find the equestrian statue of Emanuele Filiberto (known to all as â€œEl Caval Ã¨d bronsâ€�), sculpted by Carlo Marocchetti in 1838. The porticoed buildings surrounding the piazza give space to numerous bars, cafes, and restaurants.",
       "imagePath": "sancarlo.png",
       "category": "Squares",
       "lat": "45.067253",
-      "long": "7.682117"
+      "long": "7.682117",
+      "pictures": ["sancarlo.png", "sancarlo1.png", "sancarlo2.png"]
     },
     {
       "name": "Basilica di Superga",
@@ -30,15 +33,17 @@
       "imagePath": "superga.png",
       "category": "Churches",
       "lat": "45.080806",
-      "long": "7.767677"
+      "long": "7.767677",
+      "pictures": ["superga.png", "superga1.png", "superga2.png"]
     },
     {
       "name": "Parco del Valentino",
-      "description": "Parco del Valentino (also known as Valentino Park) is a popular public park in Turin, Italy. It is located along the west bank of the Po river. It covers an area of 500,000m², which makes it Turin's second largest park (Turin's largest park, the 840,000m² Pellerina Park, is Italy's most extended urban green area)",
+      "description": "Parco del Valentino (also known as Valentino Park) is a popular public park in Turin, Italy. It is located along the west bank of the Po river. It covers an area of 500,000mÂ², which makes it Turin's second largest park (Turin's largest park, the 840,000mÂ² Pellerina Park, is Italy's most extended urban green area)",
       "imagePath": "valentino.png",
       "category": "Parks",
       "lat": "45.052348",
-      "long": "7.686446"
+      "long": "7.686446",
+      "pictures": ["valentino.png", "valentino1.png", "valentino2.png", "valentino3.png"]
     },
     {
       "name": "Gran Madre di Dio",
@@ -46,7 +51,8 @@
       "imagePath": "granmadre.png",
       "category": "Churches",
       "lat": "45.062489",
-      "long": "7.699038"
+      "long": "7.699038",
+      "pictures": ["granmadre.png", "granmadre1.png", "granmadre2.png", "granmadre3.png"]
     }
   ]
 }

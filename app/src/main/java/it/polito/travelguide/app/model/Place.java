@@ -21,6 +21,7 @@ public class Place {
     private String category;
     private String lat;
     private String lg;
+    private ArrayList<String> pictures;
     
     public Place() {
     }
@@ -49,6 +50,10 @@ public class Place {
         this.lg = lg;
     }
 
+    public void setPictures(ArrayList<String> pictures){
+    	this.pictures = pictures;
+    }
+    
     public String getName() {
         return this.name;
     }
@@ -71,6 +76,10 @@ public class Place {
 
     public String getLg() {
         return this.lg;
+    }
+    
+    public ArrayList<String> getPictures(){
+    	return this.pictures;
     }
     
     public Bitmap getMainIcon(Context context, DisplayMetrics metrics){
