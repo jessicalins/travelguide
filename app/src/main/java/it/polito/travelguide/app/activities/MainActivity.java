@@ -1,8 +1,8 @@
 package it.polito.travelguide.app.activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,16 +13,17 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import it.polito.inginformatica.travelguide.app.R;
+import it.polito.travelguide.app.R;
 import it.polito.travelguide.app.adapter.CategoryAdapter;
 import it.polito.travelguide.app.model.Place;
+import it.polito.travelguide.app.model.PlacesDataContainer;
 import it.polito.travelguide.app.utils.JsonUtils;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends Activity {
     private  HashMap<String, ArrayList<Place>> map;
     private JsonUtils utils;
-    private ArrayList<Place> places;
+    //private ArrayList<Place> places;
     private ListView list;
     public static final String PREFS_NAME = "MyPrefsFile";
 
@@ -30,9 +31,14 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        utils = new JsonUtils(getApplicationContext());
-        map = utils.getMap();
-        places = utils.getAllPlaces();
+        
+        //utils = new JsonUtils(getApplicationContext());
+        //map = utils.getMap();
+        //places = utils.getAllPlaces();
+        
+        PlacesDataContainer dataContainer = PlacesDataContainer.newInstance(this);
+        map = dataContainer.getMap();
+        
         list = (ListView) findViewById(R.id.listView);
         list.setAdapter(new CategoryAdapter(getApplicationContext(), map));
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {

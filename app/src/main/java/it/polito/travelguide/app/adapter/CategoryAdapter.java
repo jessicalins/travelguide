@@ -13,9 +13,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
-import it.polito.inginformatica.travelguide.app.R;
+import it.polito.travelguide.app.R;
 import it.polito.travelguide.app.model.Place;
 import it.polito.travelguide.app.utils.JsonUtils;
 

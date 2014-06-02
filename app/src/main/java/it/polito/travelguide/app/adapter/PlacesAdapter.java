@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-import it.polito.inginformatica.travelguide.app.R;
+import it.polito.travelguide.app.R;
 import it.polito.travelguide.app.model.Place;
 
 /**
