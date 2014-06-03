@@ -3,8 +3,15 @@
     package="it.polito.travelguide.app" >
     
     <uses-sdk
-        android:minSdkVersion="11"
+        android:minSdkVersion="14"
         android:targetSdkVersion="18" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -20,9 +27,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="it.polito.travelguide.app.activities.Places"
+        <activity android:name=".activities.PlacesActivity"
             android:label="@string/app_name"/>
-        <activity android:name="it.polito.travelguide.app.activities.PlaceDetailsActivity"></activity>
+        <activity android:name="it.polito.travelguide.app.activities.PlaceDetailsActivity"
+            android:label="@string/app_name"/>
+
+        <activity android:name="it.polito.travelguide.app.activities.MapActivity"
+            android:theme="@android:style/Theme.NoTitleBar"/>
+
+        <activity android:name="it.polito.travelguide.app.activities.TestActivity"
+            android:label="@string/app_name"/>
+
+        <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
+
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyAHbXY0lhfSuLJePpJs7ce4I8nePxPhFyQ" />
     </application>
 
 </manifest>

@@ -20,7 +20,7 @@ import it.polito.travelguide.app.utils.JsonUtils;
 /**
  * Created by jessica on 30/05/14.
  */
-public class Places extends Activity {
+public class PlacesActivity extends Activity {
     public static final String PREFS_NAME = "MyPrefsFile";
 
     @Override

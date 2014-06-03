@@ -49,7 +49,7 @@ public class MainActivity extends Activity {
                 SharedPreferences.Editor editor = settings.edit();
                 editor.putString("category", categorySelected);
                 editor.commit();
-                Intent intent = new Intent(MainActivity.this, Places.class);
+                Intent intent = new Intent(MainActivity.this, PlacesActivity.class);
                 startActivity(intent);
             }
         });
