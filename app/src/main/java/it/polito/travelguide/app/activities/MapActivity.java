@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.content.IntentSender;
 import android.location.Location;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+//import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -24,7 +24,7 @@ import com.google.android.gms.maps.model.LatLng;
 import it.polito.travelguide.app.R;
 
 
-public class MapActivity extends FragmentActivity implements
+public class MapActivity extends Activity implements
         GooglePlayServicesClient.ConnectionCallbacks, GooglePlayServicesClient.OnConnectionFailedListener {
 
     private MapFragment mapFragment;

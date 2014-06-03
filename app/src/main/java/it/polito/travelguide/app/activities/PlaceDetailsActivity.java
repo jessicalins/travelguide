@@ -7,6 +7,7 @@ import it.polito.travelguide.app.R;
 import it.polito.travelguide.app.model.Place;
 import it.polito.travelguide.app.model.PlacesDataContainer;
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
@@ -43,7 +44,8 @@ public class PlaceDetailsActivity extends Activity {
 	}
 
 	public void getRoute(View view){
-		//TODO start Google Maps Activity
+		Intent intent = new Intent(this, MapActivity.class);
+        startActivity(intent);
 	}
 	
 	private void setPlacePictures(){
