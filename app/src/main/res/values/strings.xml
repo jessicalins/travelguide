@@ -6,5 +6,6 @@
     <string name="action_settings">Settings</string>
     <string name="desc_img_category">Image of category</string>
     <string name="get_me_there">Get me there</string>
+    <string name="content_description_pictures">Place Pictures</string>
 
 </resources>

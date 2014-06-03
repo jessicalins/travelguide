@@ -12,13 +12,13 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
-import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class PlaceDetailsActivity extends Activity {
 	private Place place;
-	private HorizontalScrollView scrollView;
+	private LinearLayout layout;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -47,19 +47,20 @@ public class PlaceDetailsActivity extends Activity {
 	}
 	
 	private void setPlacePictures(){
-		scrollView = (HorizontalScrollView) findViewById(R.id.place_details_pictures);
+		layout = (LinearLayout) findViewById(R.id.place_details_pictures);
 		for(int i=0; i<place.getPictures().size(); i++){
-			ImageView image = new ImageView(this);
 			InputStream inputStream = null;
             try {
                 inputStream = getAssets().open(place.getPictures().get(i));
+                Drawable d = Drawable.createFromStream(inputStream, null);
+                ImageView image = new ImageView(this);
+    			image.setImageResource(R.layout.picture);
+                image.setImageDrawable(d);
+                image.setPadding(10,  10,  10, 10);
+                layout.addView(image);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            Drawable d = Drawable.createFromStream(inputStream, null);
-            image.setImageDrawable(d);
-            image.setPadding(10,  10,  10, 10);
-            scrollView.addView(image);
 		}
 	}
 	
