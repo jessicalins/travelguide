@@ -7,7 +7,7 @@
       "category": "Coffees",
       "lat": "45.076334",
       "long": "7.678958",
-      "pictures": ["albicerin.png", "albicerin2.png"]
+      "pictures": ["albicerin.png", "albicerin1.png", "albicerin2.png"]
     },
     {
       "name": "Palazzo madama",
@@ -16,7 +16,7 @@
       "category": "Palaces",
       "lat": "45.070970",
       "long": "7.685882",
-      "pictures": ["palazzomadama.png", "palazzomadama1.png", "palazzomadama2.png"]
+      "pictures": ["palazzomadama.png", "palazzomadama1.png", "palazzomadama2.png", "palazzomadama3.png"]
     },
     {
       "name": "Piazza San Carlo",
@@ -52,7 +52,7 @@
       "category": "Churches",
       "lat": "45.062489",
       "long": "7.699038",
-      "pictures": ["granmadre.png", "granmadre1.png", "granmadre2.png", "granmadre3.png"]
+      "pictures": ["granmadre.png", "granmadre1.png", "granmadre2.png"]
     }
   ]
 }

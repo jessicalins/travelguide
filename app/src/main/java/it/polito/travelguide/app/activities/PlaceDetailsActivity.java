@@ -7,9 +7,14 @@ import it.polito.travelguide.app.R;
 import it.polito.travelguide.app.model.Place;
 import it.polito.travelguide.app.model.PlacesDataContainer;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
+import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
@@ -51,19 +56,48 @@ public class PlaceDetailsActivity extends Activity {
 	private void setPlacePictures(){
 		layout = (LinearLayout) findViewById(R.id.place_details_pictures);
 		for(int i=0; i<place.getPictures().size(); i++){
-			InputStream inputStream = null;
             try {
-                inputStream = getAssets().open(place.getPictures().get(i));
-                Drawable d = Drawable.createFromStream(inputStream, null);
                 ImageView image = new ImageView(this);
-    			image.setImageResource(R.layout.picture);
-                image.setImageDrawable(d);
+                
+                DisplayMetrics metrics = new DisplayMetrics();
+        		getWindowManager().getDefaultDisplay().getMetrics(metrics);
+    			
+                image.setImageBitmap(getBitmapFromAsset(place.getPictures().get(i), this, metrics));
                 image.setPadding(10,  10,  10, 10);
                 layout.addView(image);
-            } catch (IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 		}
+	}
+
+	private Bitmap getBitmapFromAsset(String file_name, Context context, DisplayMetrics metrics){
+    	AssetManager assetManager = context.getAssets();
+		InputStream is = null;
+		int scaled_size = getScaledSize(metrics);
+		try{
+			is = assetManager.open(file_name);
+		}catch(IOException e){
+			Log.e("RoomEditorActivity", "Exception caught: " + e.getMessage());
+		}
+		Bitmap bitmap = BitmapFactory.decodeStream(is);
+		bitmap = Bitmap.createScaledBitmap(bitmap,  (int)(scaled_size), (int)(scaled_size), false);
+		
+		return bitmap;
+    }
+	
+	private int getScaledSize(DisplayMetrics metrics){
+		if(metrics.densityDpi == DisplayMetrics.DENSITY_LOW)
+			return (int)96;
+		else if(metrics.densityDpi == DisplayMetrics.DENSITY_MEDIUM)
+			return (int)192;
+		else if(metrics.densityDpi == DisplayMetrics.DENSITY_HIGH)
+			return (int)288;
+		else if(metrics.densityDpi == DisplayMetrics.DENSITY_XHIGH)
+			return (int)384;
+		else if(metrics.densityDpi == DisplayMetrics.DENSITY_XXHIGH)
+			return (int)576;
+		return 0;
 	}
 	
 }

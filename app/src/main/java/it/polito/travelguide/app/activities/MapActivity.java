@@ -1,5 +1,15 @@
 package it.polito.travelguide.app.activities;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.StatusLine;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -201,4 +211,38 @@ public class MapActivity extends Activity implements
             Toast.makeText(getApplicationContext(), "Sorry. Location services not available to you", Toast.LENGTH_LONG).show();
         }
     }
+    
+    //TODO This method is just a stub, the return type should be a collection of waypoints
+    private void getDirections(String originCoords, String destinationCoords)throws IOException{
+    	String output = "json";
+    	String origin = "origin=" + originCoords;
+    	String destination="destination=" + destinationCoords;
+    	String key=""; //Here goes your key
+    	String mode="walking"; //This is optional
+    	String URL = "http://maps.googleapis.com/maps/api/directions/"; //We may wanto to change to https
+    	String request = URL + output + "?" + origin + "&" + destination + "&" + key + "&" + mode;
+    	
+    	HttpClient httpclient = new DefaultHttpClient();
+        HttpResponse response = httpclient.execute(new HttpGet(URL));
+        StatusLine statusLine = response.getStatusLine();
+        if(statusLine.getStatusCode() == HttpStatus.SC_OK){
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            response.getEntity().writeTo(out);
+            out.close();
+            String responseString = out.toString();
+            
+            //TODO Here we need to parse the JSON response and collect all the waypoints
+            
+        } else{
+            response.getEntity().getContent().close();
+            throw new IOException(statusLine.getReasonPhrase());
+        }
+    }
+    
+    private void drawDirections(){
+    	/*	TODO This method is just a stub. Here we should draw a Polyline on the map
+    	*	using the waypoints retrieved with geDirections(). 
+    	*/
+    }
+    
 }
