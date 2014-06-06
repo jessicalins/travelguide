@@ -77,14 +77,6 @@ public class MapActivity extends Activity implements
         map.setMyLocationEnabled(true);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        //getDirections("45.076334", "7.678958");
-
-    }
-
     // Define a DialogFragment that displays the error dialog
     public static class ErrorDialogFragment extends DialogFragment {
 
@@ -287,6 +279,7 @@ public class MapActivity extends Activity implements
                 Polyline line = map.addPolyline(new PolylineOptions()
                         .add(new LatLng(src.latitude, src.longitude), new LatLng(dest.latitude, dest.longitude))
                         .width(2)
+                        .visible(true)
                         .color(Color.BLUE).geodesic(true));
             }
 
