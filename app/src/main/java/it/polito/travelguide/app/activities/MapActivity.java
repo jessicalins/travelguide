@@ -1,21 +1,37 @@
 package it.polito.travelguide.app.activities;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.StatusLine;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.graphics.Color;
 import android.location.Location;
+import android.os.AsyncTask;
 import android.os.Bundle;
 //import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -30,8 +46,11 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 import it.polito.travelguide.app.R;
+import it.polito.travelguide.app.utils.JSONParser;
 
 
 public class MapActivity extends Activity implements
@@ -56,6 +75,14 @@ public class MapActivity extends Activity implements
         map = mapFragment.getMap();
 
         map.setMyLocationEnabled(true);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        //getDirections("45.076334", "7.678958");
+
     }
 
     // Define a DialogFragment that displays the error dialog
@@ -168,6 +195,7 @@ public class MapActivity extends Activity implements
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 17);
         map.animateCamera(cameraUpdate);
+        getDirections("Chicago", "Los+Angeles");
     }
 
     /*
@@ -213,36 +241,130 @@ public class MapActivity extends Activity implements
     }
     
     //TODO This method is just a stub, the return type should be a collection of waypoints
-    private void getDirections(String originCoords, String destinationCoords)throws IOException{
-    	String output = "json";
-    	String origin = "origin=" + originCoords;
-    	String destination="destination=" + destinationCoords;
-    	String key=""; //Here goes your key
-    	String mode="walking"; //This is optional
-    	String URL = "http://maps.googleapis.com/maps/api/directions/"; //We may wanto to change to https
-    	String request = URL + output + "?" + origin + "&" + destination + "&" + key + "&" + mode;
-    	
-    	HttpClient httpclient = new DefaultHttpClient();
-        HttpResponse response = httpclient.execute(new HttpGet(URL));
-        StatusLine statusLine = response.getStatusLine();
-        if(statusLine.getStatusCode() == HttpStatus.SC_OK){
-            ByteArrayOutputStream out = new ByteArrayOutputStream();
-            response.getEntity().writeTo(out);
-            out.close();
-            String responseString = out.toString();
-            
-            //TODO Here we need to parse the JSON response and collect all the waypoints
-            
-        } else{
-            response.getEntity().getContent().close();
-            throw new IOException(statusLine.getReasonPhrase());
+    private void getDirections(String originCoords, String destinationCoords) /*throws IOException*/{
+        String output = "json";
+        String origin = "origin=" + originCoords;
+        String destination="destination=" + destinationCoords;
+        String key="AIzaSyAHbXY0lhfSuLJePpJs7ce4I8nePxPhFyQ"; //Here goes your key
+        //String mode="walking"; //This is optional
+        String mode = "mode=walking";
+        String URL = "http://maps.googleapis.com/maps/api/directions/"; //We may wanto to change to https
+        //String request = URL + output + "?" + origin + "&" + destination + "&" + key + "&" + mode;
+        String request = URL + output + "?" + origin + "&" + destination + "&" + mode;
+
+        new getJSONThread(request).execute();
+
+//    	HttpClient httpclient = new DefaultHttpClient();
+//        HttpResponse response = httpclient.execute(new HttpGet(URL));
+//        StatusLine statusLine = response.getStatusLine();
+//        if(statusLine.getStatusCode() == HttpStatus.SC_OK){
+//            ByteArrayOutputStream out = new ByteArrayOutputStream();
+//            response.getEntity().writeTo(out);
+//            out.close();
+//            String responseString = out.toString();
+//
+//            //TODO Here we need to parse the JSON response and collect all the waypoints
+//
+//        } else{
+//            response.getEntity().getContent().close();
+//            throw new IOException(statusLine.getReasonPhrase());
+//        }
+    }
+
+    public void drawDirections(String result) {
+        try {
+            //Tranform the string into a json object
+            final JSONObject json = new JSONObject(result);
+            JSONArray routeArray = json.getJSONArray("routes");
+            JSONObject routes = routeArray.getJSONObject(0);
+            JSONObject overviewPolylines = routes.getJSONObject("overview_polyline");
+            String encodedString = overviewPolylines.getString("points");
+            List<LatLng> list = decodePoly(encodedString);
+
+            for(int z = 0; z<list.size()-1;z++){
+                LatLng src = list.get(z);
+                LatLng dest = list.get(z+1);
+                Polyline line = map.addPolyline(new PolylineOptions()
+                        .add(new LatLng(src.latitude, src.longitude), new LatLng(dest.latitude, dest.longitude))
+                        .width(2)
+                        .color(Color.BLUE).geodesic(true));
+            }
+
+        }
+        catch (JSONException e) {
+
         }
     }
-    
-    private void drawDirections(){
-    	/*	TODO This method is just a stub. Here we should draw a Polyline on the map
-    	*	using the waypoints retrieved with geDirections(). 
-    	*/
+
+    private List<LatLng> decodePoly(String encoded) {
+        List<LatLng> poly = new ArrayList<LatLng>();
+        int index = 0, len = encoded.length();
+        int lat = 0, lng = 0;
+
+        while (index < len) {
+            int b, shift = 0, result = 0;
+            do {
+                b = encoded.charAt(index++) - 63;
+                result |= (b & 0x1f) << shift;
+                shift += 5;
+            } while (b >= 0x20);
+            int dlat = ((result & 1) != 0 ? ~(result >> 1) : (result >> 1));
+            lat += dlat;
+
+            shift = 0;
+            result = 0;
+            do {
+                b = encoded.charAt(index++) - 63;
+                result |= (b & 0x1f) << shift;
+                shift += 5;
+            } while (b >= 0x20);
+            int dlng = ((result & 1) != 0 ? ~(result >> 1) : (result >> 1));
+            lng += dlng;
+
+            LatLng p = new LatLng( (((double) lat / 1E5)),
+                    (((double) lng / 1E5) ));
+            poly.add(p);
+        }
+
+        return poly;
     }
-    
+
+//    private void drawDirections(){
+//    	/*	TODO This method is just a stub. Here we should draw a Polyline on the map
+//    	*	using the waypoints retrieved with geDirections().
+//    	*/
+//    }
+
+    public class getJSONThread extends AsyncTask<Void, Void, String> {
+        private ProgressDialog progressDialog;
+        String url;
+
+        public getJSONThread(String urlPass){
+            this.url = urlPass;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            // TODO Auto-generated method stub
+            super.onPreExecute();
+            progressDialog = new ProgressDialog(MapActivity.this);
+            progressDialog.setMessage("Fetching route, Please wait...");
+            progressDialog.setIndeterminate(true);
+            progressDialog.show();
+        }
+        @Override
+        protected String doInBackground(Void... params) {
+            JSONParser jParser = new JSONParser();
+            String json = jParser.getJSONFromUrl(url);
+            return json;
+        }
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            progressDialog.hide();
+            if(result != null){
+                drawDirections(result);
+            }
+        }
+    }
 }

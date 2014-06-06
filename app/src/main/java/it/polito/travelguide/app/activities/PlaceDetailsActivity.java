@@ -25,8 +25,8 @@ import android.widget.TextView;
 public class PlaceDetailsActivity extends Activity {
 	private Place place;
 	private LinearLayout layout;
-	
-	@Override
+
+    @Override
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.activity_place_details);
