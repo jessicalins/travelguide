@@ -8,6 +8,7 @@
         android:name="com.google.android.gms.maps.MapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout="@layout/activity_main" />
+        tools:layout="@layout/activity_main"
+        android:apiKey="AIzaSyBDPOtfc1DjUu4bdET9nOTUC_U2Nw_nczQ"/>
 
 </RelativeLayout>
