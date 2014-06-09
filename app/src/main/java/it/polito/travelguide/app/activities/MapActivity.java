@@ -33,6 +33,8 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import it.polito.travelguide.app.R;
+import it.polito.travelguide.app.model.Place;
+import it.polito.travelguide.app.model.PlacesDataContainer;
 import it.polito.travelguide.app.utils.JSONParser;
 
 
@@ -42,6 +44,8 @@ public class MapActivity extends Activity implements
     private MapFragment mapFragment;
     private GoogleMap map;
     private LocationClient mLocationClient;
+    private Place destination;
+    
     /*
      * Define a request code to send to Google Play services
      * This code is returned in Activity.onActivityResult
@@ -53,6 +57,12 @@ public class MapActivity extends Activity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
 
+        Bundle extras = getIntent().getExtras();
+        String placeCategory = extras.getString("it.polito.travelguide.app.placeCategory");
+	    int placeId = extras.getInt("it.polito.travelguide.app.placeId");
+	    PlacesDataContainer dataContainer = PlacesDataContainer.newInstance(this);
+	    destination = dataContainer.getMap().get(placeCategory).get(placeId);
+	    
         mLocationClient = new LocationClient(this, this, this);
         mapFragment = ((MapFragment) getFragmentManager().findFragmentById(R.id.mapView));
         map = mapFragment.getMap();
@@ -60,49 +70,34 @@ public class MapActivity extends Activity implements
         map.setMyLocationEnabled(true);
     }
 
-    // Define a DialogFragment that displays the error dialog
     public static class ErrorDialogFragment extends DialogFragment {
-
-        // Global field to contain the error dialog
         private Dialog mDialog;
 
-        // Default constructor. Sets the dialog field to null
         public ErrorDialogFragment() {
             super();
             mDialog = null;
         }
 
-        // Set the dialog to display
         public void setDialog(Dialog dialog) {
             mDialog = dialog;
         }
 
-        // Return a Dialog to the DialogFragment.
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             return mDialog;
         }
     }
 
-    /*
-    * Called when the Activity becomes visible.
-    */
     @Override
     protected void onStart() {
         super.onStart();
-        // Connect the client.
         if(isGooglePlayServicesAvailable()){
             mLocationClient.connect();
         }
-
     }
 
-    /*
-    * Called when the Activity is no longer visible.
-    */
     @Override
     protected void onStop() {
-        // Disconnecting the client invalidates it.
         mLocationClient.disconnect();
         super.onStop();
     }
@@ -132,22 +127,16 @@ public class MapActivity extends Activity implements
     }
 
     private boolean isGooglePlayServicesAvailable() {
-        // Check that Google Play services is available
         int resultCode =  GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
-        // If Google Play services is available
         if (ConnectionResult.SUCCESS == resultCode) {
-            // In debug mode, log the status
             Log.d("Location Updates", "Google Play services is available.");
             return true;
         } else {
-            // Get the error dialog from Google Play services
             Dialog errorDialog = GooglePlayServicesUtil.getErrorDialog(resultCode,
                     this,
                     CONNECTION_FAILURE_RESOLUTION_REQUEST);
 
-            // If Google Play services can provide an error dialog
             if (errorDialog != null) {
-                // Create a new DialogFragment for the error dialog
                 ErrorDialogFragment errorFragment = new ErrorDialogFragment();
                 errorFragment.setDialog(errorDialog);
                 errorFragment.show(getFragmentManager(), "Location Updates");
@@ -164,16 +153,14 @@ public class MapActivity extends Activity implements
     */
     @Override
     public void onConnected(Bundle dataBundle) {
-        // Display the connection status
         Toast.makeText(this, "Connected", Toast.LENGTH_SHORT).show();
         Location location = mLocationClient.getLastLocation();
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 17);
         map.animateCamera(cameraUpdate);
         String request = makeURLRequest(Double.toString(location.getLatitude()),
-                Double.toString(location.getLongitude()), "45.076334", "7.678958");
+                Double.toString(location.getLongitude()), destination.getLat(), destination.getLg());
         new getJSONThread(request).execute();
-        //getDirections("Chicago", "Los+Angeles");
     }
 
     /*
@@ -243,7 +230,6 @@ public class MapActivity extends Activity implements
 
         @Override
         protected void onPreExecute() {
-            // TODO Auto-generated method stub
             super.onPreExecute();
             progressDialog = new ProgressDialog(MapActivity.this);
             progressDialog.setMessage("Fetching route, Please wait...");
@@ -281,7 +267,7 @@ public class MapActivity extends Activity implements
                 LatLng dest = list.get(z+1);
                 Polyline line = map.addPolyline(new PolylineOptions()
                         .add(new LatLng(src.latitude, src.longitude), new LatLng(dest.latitude, dest.longitude))
-                        .width(10)
+                        .width(3)
                         .visible(true)
                         .color(Color.BLUE).geodesic(true));
             }

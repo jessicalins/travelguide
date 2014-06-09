@@ -25,14 +25,16 @@ import android.widget.TextView;
 public class PlaceDetailsActivity extends Activity {
 	private Place place;
 	private LinearLayout layout;
+	private String placeCategory;
+	private int placeId;
 
     @Override
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.activity_place_details);
 	    Bundle extras = getIntent().getExtras();
-	    String placeCategory = extras.getString("it.polito.travelguide.app.placeCategory");
-	    int placeId = extras.getInt("it.polito.travelguide.app.placeId");
+	    placeCategory = extras.getString("it.polito.travelguide.app.placeCategory");
+	    placeId = extras.getInt("it.polito.travelguide.app.placeId");
 	    PlacesDataContainer dataContainer = PlacesDataContainer.newInstance(this);
 	    place = dataContainer.getMap().get(placeCategory).get(placeId);
 	    TextView textView = (TextView) findViewById(R.id.place_details_description);
@@ -50,6 +52,10 @@ public class PlaceDetailsActivity extends Activity {
 
 	public void getRoute(View view){
 		Intent intent = new Intent(this, MapActivity.class);
+		
+		intent.putExtra("it.polito.travelguide.app.placeCategory", placeCategory);
+		intent.putExtra("it.polito.travelguide.app.placeId", placeId);
+		
         startActivity(intent);
 	}
 	
