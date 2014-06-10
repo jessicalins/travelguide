@@ -28,7 +28,11 @@ import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
@@ -156,8 +160,13 @@ public class MapActivity extends Activity implements
         Toast.makeText(this, "Connected", Toast.LENGTH_SHORT).show();
         Location location = mLocationClient.getLastLocation();
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 17);
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 15);
         map.animateCamera(cameraUpdate);
+        BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.destmarker);
+        map.addMarker(new MarkerOptions()
+                .position(new LatLng(Double.parseDouble(destination.getLat()), Double.parseDouble(destination.getLg())))
+                .title(destination.getName())
+                .icon(icon));
         String request = makeURLRequest(Double.toString(location.getLatitude()),
                 Double.toString(location.getLongitude()), destination.getLat(), destination.getLg());
         new getJSONThread(request).execute();
@@ -267,7 +276,7 @@ public class MapActivity extends Activity implements
                 LatLng dest = list.get(z+1);
                 Polyline line = map.addPolyline(new PolylineOptions()
                         .add(new LatLng(src.latitude, src.longitude), new LatLng(dest.latitude, dest.longitude))
-                        .width(3)
+                        .width(10)
                         .visible(true)
                         .color(Color.BLUE).geodesic(true));
             }

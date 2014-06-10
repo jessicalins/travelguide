@@ -2,20 +2,20 @@
 <pre-dex-items>
 
     <item
-        dex="/home/jessica/AndroidStudioProjects/TravelGuide/app/build/intermediates/pre-dexed/debug/support-v4-19.1.0-6727776f0115ead847ae9a563093de4486ba5e31.jar"
+        dex="/home/jessica/AndroidStudioProjects/travelguide/app/build/intermediates/pre-dexed/debug/support-v4-19.1.0-6727776f0115ead847ae9a563093de4486ba5e31.jar"
         jar="/home/jessica/Development/android-studio/sdk/extras/android/m2repository/com/android/support/support-v4/19.1.0/support-v4-19.1.0.jar"
         jumboMode="false"
         revision="19.1.0"
         sha1="85f201b380937e61a9dce6ca90ccf6872abbfb67"/>
     <item
-        dex="/home/jessica/AndroidStudioProjects/TravelGuide/app/build/intermediates/pre-dexed/debug/classes-9fd3e0fb1c8e2c382290c5db84d9fbc6a079dda4.jar"
-        jar="/home/jessica/AndroidStudioProjects/TravelGuide/build/intermediates/exploded-aar/com.android.support/appcompat-v7/19.1.0/classes.jar"
+        dex="/home/jessica/AndroidStudioProjects/travelguide/app/build/intermediates/pre-dexed/debug/classes-a30711bb9cf3a40a976ed2864755fa0ae32a5710.jar"
+        jar="/home/jessica/AndroidStudioProjects/travelguide/build/intermediates/exploded-aar/com.android.support/appcompat-v7/19.1.0/classes.jar"
         jumboMode="false"
         revision="19.1.0"
         sha1="3499ceba05ca1f6037c6a2fad73df8f636224a28"/>
     <item
-        dex="/home/jessica/AndroidStudioProjects/TravelGuide/app/build/intermediates/pre-dexed/debug/classes-7e27a9c6b5670a13156c5c7051e5ea9eb5d85a04.jar"
-        jar="/home/jessica/AndroidStudioProjects/TravelGuide/build/intermediates/exploded-aar/com.google.android.gms/play-services/4.4.52/classes.jar"
+        dex="/home/jessica/AndroidStudioProjects/travelguide/app/build/intermediates/pre-dexed/debug/classes-206ff0af07afd3d48ba5b52a64553d5347b7b69b.jar"
+        jar="/home/jessica/AndroidStudioProjects/travelguide/build/intermediates/exploded-aar/com.google.android.gms/play-services/4.4.52/classes.jar"
         jumboMode="false"
         revision="19.1.0"
         sha1="3dfdf1db5ce5ea2999a5dcde8c8e650b02660059"/>

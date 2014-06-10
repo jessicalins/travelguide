@@ -1,7 +1,9 @@
 package it.polito.travelguide.app.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,7 @@ import java.util.ArrayList;
 
 import it.polito.travelguide.app.R;
 import it.polito.travelguide.app.model.Place;
+import it.polito.travelguide.app.utils.Utils;
 
 /**
  * Created by jessica on 30/05/14.
@@ -22,10 +25,14 @@ import it.polito.travelguide.app.model.Place;
 public class PlacesAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
     private ArrayList<Place> places;
+    private DisplayMetrics metrics;
+    private Context context;
 
-    public PlacesAdapter(Context context, ArrayList<Place> places) {
+    public PlacesAdapter(Context context, ArrayList<Place> places, DisplayMetrics metrics) {
         this.mInflater = LayoutInflater.from(context);
         this.places = places;
+        this.metrics = metrics;
+        this.context = context;
     }
 
     @Override
@@ -59,18 +66,9 @@ public class PlacesAdapter extends BaseAdapter {
 
         if (position < places.size()) {
             holder.imageName.setText(places.get(position).getName());
-
-            // get input stream
-            InputStream inputStream = null;
-            try {
-                inputStream = convertView.getContext().getAssets().open(places.get(position).getImagePath());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            // load image as Drawable
-            Drawable d = Drawable.createFromStream(inputStream, null);
+            Bitmap img = Utils.getBitmapFromAsset(places.get(position).getImagePath(), context, metrics);
             // set image to ImageView
-            holder.image.setImageDrawable(d);
+            holder.image.setImageBitmap(img);
         }
         return convertView;
     }

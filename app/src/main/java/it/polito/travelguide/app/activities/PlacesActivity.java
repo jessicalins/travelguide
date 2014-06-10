@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -32,7 +33,11 @@ public class PlacesActivity extends Activity {
         HashMap<String, ArrayList<Place>> map = utils.getMap();
         ArrayList<Place> places = map.get(settings.getString("category", null));
         ListView listView = (ListView) findViewById(R.id.listView);
-        listView.setAdapter(new PlacesAdapter(getApplicationContext(), places));
+
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+
+        listView.setAdapter(new PlacesAdapter(getApplicationContext(), places, metrics));
         listView.setOnItemClickListener(new OnItemClickListener(){
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position,

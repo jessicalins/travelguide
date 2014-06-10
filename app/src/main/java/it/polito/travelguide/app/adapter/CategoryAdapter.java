@@ -1,7 +1,9 @@
 package it.polito.travelguide.app.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +18,9 @@ import java.util.HashMap;
 
 import it.polito.travelguide.app.R;
 import it.polito.travelguide.app.model.Place;
+import it.polito.travelguide.app.model.PlacesDataContainer;
 import it.polito.travelguide.app.utils.JsonUtils;
+import it.polito.travelguide.app.utils.Utils;
 
 
 /**
@@ -25,10 +29,14 @@ import it.polito.travelguide.app.utils.JsonUtils;
 public class CategoryAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
     private HashMap<String, ArrayList<Place>> map;
+    private DisplayMetrics metrics;
+    private Context context;
 
-    public CategoryAdapter(Context context, HashMap<String, ArrayList<Place>> map) {
+    public CategoryAdapter(Context context, HashMap<String, ArrayList<Place>> map, DisplayMetrics metrics) {
         this.mInflater = LayoutInflater.from(context);
         this.map = map;
+        this.metrics = metrics;
+        this.context = context;
     }
 
     @Override
@@ -63,18 +71,9 @@ public class CategoryAdapter extends BaseAdapter {
         JsonUtils utils = new JsonUtils(viewGroup.getContext());
         ArrayList<String> categories = utils.getCategories(map);
         holder.imageName.setText(categories.get(position));
-
-        // get input stream
-        InputStream inputStream = null;
-        try {
-            inputStream = convertView.getContext().getAssets().open(map.get(categories.get(position)).get(0).getImagePath());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        // load image as Drawable
-        Drawable d = Drawable.createFromStream(inputStream, null);
+        Bitmap img = Utils.getBitmapFromAsset(map.get(categories.get(position)).get(0).getImagePath(), context, metrics);
         // set image to ImageView
-        holder.image.setImageDrawable(d);
+        holder.image.setImageBitmap(img);
 
         return convertView;
     }

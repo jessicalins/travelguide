@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,7 +24,6 @@ import it.polito.travelguide.app.utils.JsonUtils;
 public class MainActivity extends Activity {
     private  HashMap<String, ArrayList<Place>> map;
     private JsonUtils utils;
-    //private ArrayList<Place> places;
     private ListView list;
     public static final String PREFS_NAME = "MyPrefsFile";
 
@@ -33,14 +33,16 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         
         utils = new JsonUtils(getApplicationContext());
-        //map = utils.getMap();
-        //places = utils.getAllPlaces();
         
         PlacesDataContainer dataContainer = PlacesDataContainer.newInstance(this);
         map = dataContainer.getMap();
         
         list = (ListView) findViewById(R.id.listView);
-        list.setAdapter(new CategoryAdapter(getApplicationContext(), map));
+
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+
+        list.setAdapter(new CategoryAdapter(getApplicationContext(), map, metrics));
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
