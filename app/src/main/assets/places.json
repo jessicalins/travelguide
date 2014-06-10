@@ -20,7 +20,7 @@
     },
     {
       "name": "Piazza San Carlo",
-      "description": "Piazza San Carlo was designed by Carlo di Castellamonte in 1642 and completed in 1650. In the middle of the piazza youâ€™ll find the equestrian statue of Emanuele Filiberto (known to all as â€œEl Caval Ã¨d bronsâ€�), sculpted by Carlo Marocchetti in 1838. The porticoed buildings surrounding the piazza give space to numerous bars, cafes, and restaurants.",
+      "description": "Piazza San Carlo was designed by Carlo di Castellamonte in 1642 and completed in 1650. In the middle of the piazza you'll find the equestrian statue of Emanuele Filiberto (known to all as 'El Caval d' brons'), sculpted by Carlo Marocchetti in 1838. The porticoed buildings surrounding the piazza give space to numerous bars, cafes, and restaurants.",
       "imagePath": "sancarlo.png",
       "category": "Squares",
       "lat": "45.067253",
@@ -38,7 +38,7 @@
     },
     {
       "name": "Parco del Valentino",
-      "description": "Parco del Valentino (also known as Valentino Park) is a popular public park in Turin, Italy. It is located along the west bank of the Po river. It covers an area of 500,000mÂ², which makes it Turin's second largest park (Turin's largest park, the 840,000mÂ² Pellerina Park, is Italy's most extended urban green area)",
+      "description": "Parco del Valentino (also known as Valentino Park) is a popular public park in Turin, Italy. It is located along the west bank of the Po river. It covers an area of 500,000mÂ², which makes it Turin's second largest park (Turin's largest park, the 840,000m² Pellerina Park, is Italy's most extended urban green area)",
       "imagePath": "valentino.png",
       "category": "Parks",
       "lat": "45.052348",
@@ -53,6 +53,15 @@
       "lat": "45.062489",
       "long": "7.699038",
       "pictures": ["granmadre.png", "granmadre1.png", "granmadre2.png"]
+    },
+    {
+      "name": "Piazza Vittorio Veneto",
+      "description": "Piazza Vittorio Veneto is located at the end of via Po, and near the Po river. It covers an area of 39.960 m² and was built by  Giuseppe Frizzi in 1825. Today Piazza Vittorio is a very popular gathering place in Turin, as it houses many cafes and restaurants.",
+      "imagePath": "vittorio.png",
+      "category": "Squares",
+      "lat": "45.0647573",
+      "long": "7.695606",
+      "pictures": ["vittorio.png", "vittorio1.png", "vittorio2.png", "vittorio3.png"]
     }
   ]
 }
