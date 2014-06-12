@@ -80,6 +80,15 @@
       "lat": "45.067465",
       "long": "7.681850",
       "pictures": ["caffetorino.png", "caffetorino1.png", "caffetorino2.png", "caffetorino3.png"]
+    },
+    {
+      "name": "Palazzo Reale",
+      "description": "The Royal Palace of Turin (Palazzo Reale di Torino) is a historic palace of the House of Savoy in Turin. The palace was built in the 16th century and was subsequently modernized and ampliated. More recently the palace was turned into a museum and later became a UNESCO World Heritage Site. ",
+      "imagePath": "caffetorino.png",
+      "category": "Palaces",
+      "lat": "45.0727554",
+      "long": "7.6863001",
+      "pictures": ["palazzoreale.png", "palazzoreale1.png", "palazzoreale2.png", "palazzoreale3.png", "palazzoreale4.png"]
     }
   ]
 }
