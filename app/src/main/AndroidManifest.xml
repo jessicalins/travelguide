@@ -47,11 +47,12 @@
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyAHbXY0lhfSuLJePpJs7ce4I8nePxPhFyQ" />
+            android:value="AIzaSyDbkjZSnXt_s9jmfdzcIFhF2-okE95iqgA" />
         <!-- jessica's key 2 -->
         <!-- android:value="AIzaSyDbkjZSnXt_s9jmfdzcIFhF2-okE95iqgA" /> -->
 
         <!-- jessica's key 1 -->
+        <!-- android:value="AIzaSyAHbXY0lhfSuLJePpJs7ce4I8nePxPhFyQ" /> -->
         <!--    android:value="" /> -->
         <!-- matteo's key -->
         <!--    android:value="AIzaSyBmNRiQU7UnmzuVp4jMTT1BiFq1Ahc0Sng" /> -->

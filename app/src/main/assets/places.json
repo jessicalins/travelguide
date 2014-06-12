@@ -62,6 +62,24 @@
       "lat": "45.0647573",
       "long": "7.695606",
       "pictures": ["vittorio.png", "vittorio1.png", "vittorio2.png", "vittorio3.png"]
+    },
+    {
+      "name": "Giardini Reali",
+      "description": "The Royal Gardens are gardens that are located behind the Royal Palace in Turin . The gardens behind the palace immediately begin and end in the course of St. Maurice. You access it from Piazza Castello , passing the entrance to the Royal Palace.",
+      "imagePath": "giardini.png",
+      "category": "Parks",
+      "lat": "45.072513",
+      "long": "7.689337",
+      "pictures": ["giardini.png", "giardini1.png", "giardini2.png", "giardini3.png", "giardini4.png"]
+    },
+    {
+      "name": "Caffè Torino",
+      "description": "The Caffè Torino first opened in 1903. Its founder was courageous enough - and enough of an entrepreneur - to want to enter into competition with the famous old cafes which has overlooked the wonderful Piazza San Carlo for so many years. He turned the Caffè Torino into a kind a salon. The Caffè Torino was decorated according to the taste which prevailed at the turn of the century: beautiful marble, painted medallions, finely embossed long benches of wood and marble, a sumptuous staircase and beautiful gilded mirrors. It is the kind of taste which is timeless and which still looks good today.",
+      "imagePath": "caffetorino.png",
+      "category": "Coffees",
+      "lat": "45.067465",
+      "long": "7.681850",
+      "pictures": ["caffetorino.png", "caffetorino1.png", "caffetorino2.png", "caffetorino3.png"]
     }
   ]
 }
