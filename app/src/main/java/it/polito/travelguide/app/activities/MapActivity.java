@@ -255,6 +255,7 @@ public class MapActivity extends Activity implements
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
             progressDialog.hide();
+            progressDialog.dismiss();
             if(result != null){
                 drawDirections(result);
             }
